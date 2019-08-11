@@ -1,0 +1,20 @@
+{
+  "name": "fuku",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bitcoinjs-lib": "^5.1.2",
+    "crypto-js": "^3.1.9-1",
+    "dat-swarm-defaults": "^1.0.2",
+    "discovery-swarm": "^6.0.0",
+    "leveldown": "^5.1.1",
+    "levelup": "^4.1.0",
+    "standard-ecies": "^1.0.0"
+  }
+}
