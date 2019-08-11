@@ -41,7 +41,7 @@ var cbReset = async function(){
   sw.join('my-tester-00101')
   sw.on('connection', (conn, info) => {
     console.log("peer connection "+info.id.toString())
-  }
+  })
 }
 cbReset();
 
