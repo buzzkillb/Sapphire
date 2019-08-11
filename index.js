@@ -40,8 +40,20 @@ var cbReset = async function(){
   var sw = await getConnectionConfig(this);
   sw.join('my-tester-00101')
   sw.on('connection', (conn, info) => {
-    console.log("peer connection "+info.id.toString())
+
+    if(PEERS.peers.find(o => o.id === info.id.toString())){
+
+    }else{
+      console.log("peer connection "+info.id.toString());
+      getThree = new PEER.Peer(info.id.toString(),info.host,info.port);
+      PEERS.peers.push(getThree)
+      getThree.conn = conn
+    }
+
+    //console.log(PEERS.peers.length)
+    //setTimeout(function(){console.log(getThree)},2000)
   })
+
 }
 cbReset();
 
