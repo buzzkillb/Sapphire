@@ -52,6 +52,8 @@ var cbReset = async function(){
 
     //console.log(PEERS.peers.length)
     //setTimeout(function(){console.log(getThree)},2000)
+    
+
   })
 
 }
