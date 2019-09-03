@@ -8,6 +8,7 @@ var BLKDB = require('./level.js');
 var globalGenesisHash = "hallelujah";
 
 var chainState = {};
+var connSeq;
 
 /////////////////////////////////////////////asynchronous peer connection engine
 var getConnectionConfig = async function(ntwk){
@@ -41,18 +42,29 @@ var cbReset = async function(){
   sw.join('my-tester-00101')
   sw.on('connection', (conn, info) => {
 
-    if(PEERS.peers.find(o => o.id === info.id.toString())){
+    const seq = connSeq
+    const peerId = info.id.toString('hex');
+    if(info.id != Buffer.from(chainState.nodePersistantId).toString('hex')){
+      var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+      var infoHost = info.host;
+      if(!infoHost.match(ipformat)){
+        infoHost = infoHost.split(":")[3];
+      }
+      if(PEERS.peers.find(o => o.id === peerId)){
+        PEERS.peers.find(o => o.id === peerId).conn = conn;
+        //then this peer is aleady in the line up
+      }else if(PEERS.peers.find(o => o.ip === infoHost)){
+        PEERS.peers.find(o => o.ip === infoHost).conn = conn;
+      }else{
+        console.log("peer connection at  "+infoHost+" with id "+peerId);
+        var addingPeer = new PEER.Peer(peerId,infoHost,info.port);
+        PEERS.peers.push(addingPeer)
+        addingPeer.conn = conn;
+      }
 
-    }else{
-      console.log("peer connection "+info.id.toString());
-      getThree = new PEER.Peer(info.id.toString(),info.host,info.port);
-      PEERS.peers.push(getThree)
-      getThree.conn = conn
-    }
-
-    //console.log(PEERS.peers.length)
-    //setTimeout(function(){console.log(getThree)},2000)
-    
+      console.log(PEERS.peers.length)
+      //setTimeout(function(){console.log(getThree)},2000)
+    }//end if info.id != Buffer...
 
   })
 
