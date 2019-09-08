@@ -34,6 +34,12 @@ echo ${TEST_IT}
 TEST_IT=$(docker exec myshellbox sudo sed -i -e 's/\r$//' ./deploy.sh)
 echo ${TEST_IT}
 
+TEST_IT=$(docker exec myshellbox sudo rm -f /etc/docker/daemon.json)
+echo ${TEST_IT}
+
+TEST_IT=$(docker exec myshellbox sudo cp ./daemon.json /etc/docker/daemon.json)
+echo ${TEST_IT}
+
 TEST_IT=$(docker exec myshellbox sudo service docker start)
 echo ${TEST_IT}
 
