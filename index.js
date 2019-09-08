@@ -60,6 +60,7 @@ var cbReset = async function(){
         var addingPeer = new PEER.Peer(peerId,infoHost,info.port);
         PEERS.peers.push(addingPeer)
         addingPeer.conn = conn;
+        
       }
 
       console.log(PEERS.peers.length)

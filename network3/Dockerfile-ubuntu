@@ -1,0 +1,10 @@
+# Use an official ubuntu runtime as a parent image
+FROM ubuntu:18.04
+
+RUN apt-get update && \
+apt-get -y install sudo; useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo; \
+sudo apt-get update; sudo apt-get remove docker docker-engine docker.io; sudo apt -y install docker.io; \
+sudo apt-get -y install systemd; sudo systemctl start docker; sudo systemctl enable docker;
+
+USER docker
+CMD /bin/bash
