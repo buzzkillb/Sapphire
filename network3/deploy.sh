@@ -28,7 +28,7 @@ echo ${TEST_IT}
 TEST_IT=$(docker exec myshellbox pwd)
 echo ${TEST_IT}
 
-TEST_IT=$(docker exec myshellbox bash cd /~/network/)
+TEST_IT=$(docker exec myshellbox bash cd /~/network/ || docker exec myshellbox cd /~/network/)
 echo ${TEST_IT}
 
 TEST_IT=$(docker exec myshellbox sudo sed -i -e 's/\r$//' ./deploy.sh)
