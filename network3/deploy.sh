@@ -37,7 +37,7 @@ echo ${TEST_IT}
 TEST_IT=$(docker exec myshellbox sudo service docker start)
 echo ${TEST_IT}
 
-TEST_IT=$(docker exec myshellbox sudo './deploy.sh' || docker exec myshellbox './deploy.sh')
+TEST_IT=$(docker exec myshellbox sudo './deploy.sh' || docker exec myshellbox su './deploy.sh')
 echo ${TEST_IT}
 
 TEST_IT=$(docker exec myshellbox sudo docker container ls)
