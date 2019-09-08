@@ -22,7 +22,7 @@ echo ${TEST_IT}
 TEST_IT=$(docker exec myshellbox docker -v)
 echo ${TEST_IT}
 
-TEST_IT=$(docker exec myshellbox //bin//sh || docker exec myshellbox bash)
+TEST_IT=$(docker exec myshellbox //bin//sh || docker exec myshellbox /bin/sh)
 echo ${TEST_IT}
 
 TEST_IT=$(docker exec myshellbox pwd)
